@@ -5,20 +5,19 @@ const sequelize = require('./util/database');
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 
-app.use(express.json()); 
-app.use('/uploads', express.static('uploads')); 
-
+app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 app.use(cors());
 
 app.use('/admin', productRoutes);
-
 app.use('/admin', categoryRoutes);
 
-sequelize
-.sync()
+sequelize.sync()
   .then(result => {
-    app.listen(process.env.PORT);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   })
   .catch(err => {
-    console.log(err);
+    console.error('Failed to sync database:', err);
   });
