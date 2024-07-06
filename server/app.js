@@ -5,6 +5,8 @@ const sequelize = require('./util/database');
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 
+const PORT = process.env.PORT;
+
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use(cors());
